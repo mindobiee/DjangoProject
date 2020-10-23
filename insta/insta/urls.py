@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('start/', include('api.urls')), # 새로만들어준 app의 url 기본 path설정해주기
+    path('', include('api.urls')), # 새로만들어준 app의 url 기본 path설정해주기
     path('admin/', admin.site.urls),
 ]

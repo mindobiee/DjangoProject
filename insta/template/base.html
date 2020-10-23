@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% block title %}Django Blog{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+
+    {% block extra-style %}{% endblock %}
+</head>
+<body style="padding-top:90px;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="#">instagram</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-1 btn btn-primary">
+            </li>
+            <li class="nav-item mx-1 btn btn-primary">
+            </li>
+            <li class="nav-item mx-1 btn btn-primary">
+            </li>
+            <li class="nav-item mx-1 btn btn-primary">
+            </li>
+            <li class="nav-item dropdown mx-1 btn btn-primary">
+                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                    Util
+                </a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-divider"></div>
+                </div>
+            </li>
+        </ul>
+
+        <li class="nav-item dropdown mx-1 btn btn-primary">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                Add
+            </a>
+            <div class="dropdown-menu">
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown mx-1 btn btn-primary">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                Change
+            </a>
+            <div class="dropdown-menu">
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
+
+        <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Global Search" name=search_word"">
+        </form>
+
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn btn-primary">
+                {% if user.is_active %}
+                    <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>&ensp;
+                        {% firstof user.get_short_name user.get_username %}&ensp;
+                    </a>
+                    <div class="dropdown-menu">
+                    </div>
+                {% else %}
+                    <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>&ensp;
+                        Anonymous&ensp;
+                    </a>
+                    <div class="dropdown-menu">
+                    </div>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+{% block footer %}{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/c998a172fe.js"></script>
+
+{% block extra-script %}{% endblock %}
+</body>
+</html>
