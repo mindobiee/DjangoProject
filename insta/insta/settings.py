@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth', # 추가해준다.
+    'member.apps.MemberConfig' # 앱 추가
 ]
 
 MIDDLEWARE = [
@@ -124,3 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 로그인 성공 URL
+LOGIN_REDIRECT_URL="/"
+# 로그아웃 페이지 URL
+LOGOUT_REDIRECT_URL="/"

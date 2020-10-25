@@ -7,12 +7,17 @@ from django.db import models
 
 class Member(models.Model):
     # id, password, 닉네임, 이메일, 전화번호, 설명
-    id = models.CharField(max_length=20)
+    # id, pw, nickname, email, phone_number, desc
+    name = models.CharField(max_length=20)
     pw = models.CharField(max_length=20)
-    nickname = models.CharField(max_length=20)
-    email = models.CharField()
-    phone_number = models.CharField(max_length=13)
-    desc = models.TextField()
+
+    # nickname = models.CharField(max_length=20)
+    # email = models.CharField()
+    # phone_number = models.CharField(max_length=13)
+    # desc = models.TextField()
+
+    class Meta:
+        db_table= "members"
 
 #
 # class Post(models.Model):
