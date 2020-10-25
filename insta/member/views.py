@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 # Create your views here.
 
@@ -35,28 +34,28 @@ def create_user(request):
             # 예외처리 발생 상황시 메시지와 함께 결과 화면 페이지로 이동시킨다
             return render(request, 'registration/signup_done.html', {'message': '회원이 이미 있음'})
     else:  # 요청이 POST 방식이 아닐 경우 회원가입 페이지로 이동한다.
-            # UserCreateForm을 form 변수에 담는다.
+        # UserCreateForm을 form 변수에 담는다.
         form = UserCreateForm()
         # 회원가입 페이지로 폼의 데이터와 함께 이동한다.
         return render(request, 'registration/signup.html', {'form': form})
 
 
-
 # urls.py에서 선언한 path에 매칭되는 logout메소드를 작성
 def sign_out(request):
-    logout(request) # Django 내부에 logout 로직이 구현되어 있어 불러다 쓰기만 하면 된다.
+    logout(request)  # Django 내부에 logout 로직이 구현되어 있어 불러다 쓰기만 하면 된다.
     # return HttpResponse(status=200)
     return render(request, 'home/base.html')
 
 
 # urls.py에서 선언한 path에 매칭되는 login메소드를 작성
 def sign_in(request):
-    if request.method == 'POST': # 요청이 POST라면 조건문 안이 실행된다.
+    if request.method == 'POST':  # 요청이 POST라면 조건문 안이 실행된다.
         # username과 password를 확인하여 해당 User객체를 user변수에 담기
-        user = authenticate(request, username=request.POST.get('username',''), password=request.POST.get('password',''))
+        user = authenticate(request, username=request.POST.get('username', ''),
+                            password=request.POST.get('password', ''))
         if user is not None:
-            login(request, user) # Django 내부에 login 로직이 구현되어 있어 불러다 쓰기만 하면된다.
+            login(request, user)  # Django 내부에 login 로직이 구현되어 있어 불러다 쓰기만 하면된다.
         return render(request, 'registration/login.html', {'message': "로그인 되었습니다."})
-    else: # 요청이 GET이라면 else안이 실행된다.
-        form = AuthenticationForm() # Django에서 지원하는 로그인 form
+    else:  # 요청이 GET이라면 else안이 실행된다.
+        form = AuthenticationForm()  # Django에서 지원하는 로그인 form
         return render(request, 'registration/login.html', {'form': form})

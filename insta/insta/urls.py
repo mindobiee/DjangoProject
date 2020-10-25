@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 # from .views import HomeView
 
 urlpatterns = [
-    path('', include('api.urls')), # 새로만들어준 app의 url 기본 path설정해주기
+    path('', include('api.urls')),  # 새로만들어준 app의 url 기본 path설정해주기
     path('member/', include('member.urls')),
     path('admin/', admin.site.urls, name="admin"),
-    path('rest-auth/',include('rest_auth.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('photo/', include('photo.urls')),
+
     # path('member/', views.index)
 ]

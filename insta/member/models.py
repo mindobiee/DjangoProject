@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 # 회원 DB와 게시글, 댓글 DB
@@ -17,7 +18,7 @@ class Member(models.Model):
     # desc = models.TextField()
 
     class Meta:
-        db_table= "members"
+        db_table = "members"
 
 #
 # class Post(models.Model):
