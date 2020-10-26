@@ -11,7 +11,7 @@ from .models import Photo
 
 class PhotoCreate(CreateView):
     model = Photo
-    fields = ['text', 'img']
+    fields = ['text', 'img', 'user']
     template_name_suffix = '_create'
     success_url = '/photo'
 
