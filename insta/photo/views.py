@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from .forms import PostSearchForm
 
 # Create your views here.
 from django.views.generic.list import ListView
@@ -37,5 +38,20 @@ class PhotoDelete(DeleteView):
     success_url = '/photo'
 
 
+
+class PhotoSearchView(FormView):
+    form_class = PostSearchForm
+    template_name = 'photo/photo_search.html'
+
+    def form_valid(self, form):
+        searchWord = form.cleaned_data['search_word']
+        photo_list = Photo.objects.filter(Q(text__icontains=searchWord)).distinct()
+
+        context = {}
+        context['form'] = form
+        context['search_term'] = searchWord
+        context['object_list'] = photo_list
+
+        return render(self.request, self.template_name, context)
 
 
