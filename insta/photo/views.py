@@ -11,11 +11,12 @@ from .models import Photo
 
 class PhotoCreate(CreateView):
     model = Photo
-    fields = ['text', 'img', 'user']
+    fields = ['text', 'img']
     template_name_suffix = '_create'
     success_url = '/photo'
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         form.instance.save()
         return redirect('/photo')
 
@@ -38,7 +39,6 @@ class PhotoDelete(DeleteView):
     success_url = '/photo'
 
 
-
 class PhotoSearchView(FormView):
     form_class = PostSearchForm
     template_name = 'photo/photo_search.html'
@@ -53,5 +53,3 @@ class PhotoSearchView(FormView):
         context['object_list'] = photo_list
 
         return render(self.request, self.template_name, context)
-
-
