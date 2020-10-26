@@ -9,11 +9,23 @@ from django.contrib.auth.models import User  # User 모델을 import한다.
 # logout(유저객체 session에서 제거) import하기
 from django.contrib.auth import authenticate, login, logout
 # Django 내부에 구현된 AuthenticationForm import하기
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 
 
 # urls.py에 정의한 path와 매칭되는 메소드를 views.py에서 정의
 
+# 마이 페이지에서 자기 정보를 수정하기
+def update(request):
+    if request.method == 'POST':
+        # 수정하는 로직 필요
+        postdata= request.POST.copy()
+        form = UserChangeForm(postdata)
+        if form.is_valid():
+            form.save()
+        return render(request, 'home/base.html', {'message': "계정 정보가 수정되었습니다."})
+    else:
+        form = UserChangeForm()
+        return render(request, 'registration/update.html', {'form': form})
 
 def create_user(request):
     if request.method == 'POST':  # 요청이 POST형식이면 if문안의 내용실행
@@ -28,7 +40,7 @@ def create_user(request):
             # 생성된 유저를 DB에 저장한다.
             new_user.save()
             # 회원가입이 완료되었다면 메시지와 함께 결과 화면 페이지로 이동시킨다
-            return render(request, 'registration/signup_done.html', {'message': '회원가입이 완료됨'})
+            return render(request, 'registration/signup_done.html', {'message': '회원가입이 완료되었습니다.'})
 
         except:
             # 예외처리 발생 상황시 메시지와 함께 결과 화면 페이지로 이동시킨다
@@ -59,3 +71,4 @@ def sign_in(request):
     else:  # 요청이 GET이라면 else안이 실행된다.
         form = AuthenticationForm()  # Django에서 지원하는 로그인 form
         return render(request, 'registration/login.html', {'form': form})
+

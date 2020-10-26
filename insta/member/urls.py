@@ -8,4 +8,5 @@ urlpatterns = [
     url('join/', views.create_user, name="join"),
     url('login/', views.sign_in, name="login"),
     url('logout/', views.sign_out, name='logout'),
+    url('update/', views.update, name='update')
 ]
