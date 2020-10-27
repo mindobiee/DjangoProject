@@ -137,3 +137,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
+# 커스텀 유저 모델을 생성하기 위한 셋팅
+AUTH_USER_MODEL = 'member.User'
